@@ -221,9 +221,7 @@ class BigIntOperationsTest {
 
     @Test
     fun test_square_0x11223344U_0xad2ffffdU_0x17eU() {
-        val num =
-            uintArrayOf(0x11223344U, 0xad2ffffdU, 0x17eU).toBigInt(-1)
-        println(num)
+        val num = uintArrayOf(0x11223344U, 0xad2ffffdU, 0x17eU).toBigInt(-1)
         val res = num * num
         assertEquals(
             res,
