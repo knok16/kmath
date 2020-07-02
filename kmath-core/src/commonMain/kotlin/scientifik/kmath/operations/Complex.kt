@@ -28,8 +28,8 @@ object ComplexField : ExtendedField<Complex> {
         Complex(a.re * b.re - a.im * b.im, a.re * b.im + a.im * b.re)
 
     override fun divide(a: Complex, b: Complex): Complex {
-        val norm = b.re * b.re + b.im * b.im
-        return Complex((a.re * b.re + a.im * b.im) / norm, (a.re * b.im - a.im * b.re) / norm)
+        val scale = b.re * b.re + b.im * b.im
+        return multiply(a, Complex(b.re / scale, -b.im / scale))
     }
 
     override fun sin(arg: Complex): Complex = i * (exp(-i * arg) - exp(i * arg)) / 2
@@ -55,11 +55,7 @@ object ComplexField : ExtendedField<Complex> {
 
     operator fun Double.times(c: Complex) = Complex(c.re * this, c.im * this)
 
-    override fun symbol(value: String): Complex = if (value == "i") {
-        i
-    } else {
-        super.symbol(value)
-    }
+    override fun symbol(value: String): Complex = if (value == "i") i else super.symbol(value)
 }
 
 /**
